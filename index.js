@@ -1,9 +1,25 @@
 const http = require("http");
+
 const representation = require("./representor.js");
 const home = require("./connectors/home.js");
+const utils = require("./connectors/utils.js");
+
+const reHome = new RegExp("^/home/.*", "i");
 
 function handler(req, res) {
-  var doc = home(req, res, handleResponse);
+  var flg, doc;
+  flg = false;
+
+  try {
+    if (flg === false && reHome.test(req.url)) {
+      flg = true;
+      doc = home(req, res, handleResponse);
+    }
+  } catch (ex) {}
+
+  if (flg === false) {
+    handleResponse(req, res, utils.errorResponse(req, res, "Not Found", 404));
+  }
 }
 
 function handleResponse(req, res, doc) {

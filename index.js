@@ -1,6 +1,6 @@
-const http = require('http');
-const representation = require('./representor.js');
-const home = require('./connectors/home.js');
+const http = require("http");
+const representation = require("./representor.js");
+const home = require("./connectors/home.js");
 
 function handler(req, res) {
   var doc = home(req, res, handleResponse);
@@ -12,11 +12,10 @@ function handleResponse(req, res, doc) {
 }
 
 function sendResponse(req, res, body) {
-  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.writeHead(200, { "Content-Type": "application/json" });
   res.end(body);
 }
 
 const server = http.createServer(handler);
-
 
 server.listen(3000);

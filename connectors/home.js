@@ -29,6 +29,7 @@ function main(req, res, respond) {
   doc.related = related;
 
   respond(req, res, {
+    code: 200,
     doc: {
       home: doc,
     },
